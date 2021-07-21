@@ -1,7 +1,8 @@
-#Your code here
-1
-sfsdf
-sfdds
+#include <iostream>
+using namespace std;
 
-  git config --global user.email "thisaltennakoon@gmail.com"
-  git config --global user.name "thisaltennakoon"
+int main() {
+  cout << "Hello World!";
+  return 0;
+}
+1
