@@ -1,3 +1,5 @@
+//Serial program
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -9,8 +11,10 @@ struct list_node_s {
     int data;
     struct  list_node_s* next;
 };
+struct list_node_s head;
 
-int Member(int value, struct list_node_s* head_p) {
+int Member(int value) {
+    struct list_node_s* head_p = &head;
     struct list_node_s* curr_p = head_p;
 
     while (curr_p != NULL && curr_p->data < value) {
@@ -24,7 +28,8 @@ int Member(int value, struct list_node_s* head_p) {
     }
 }
 
-int Insert(int value, struct list_node_s** head_pp) {
+int Insert(int value) {
+    struct list_node_s** head_pp = &head.next;
     struct list_node_s* curr_p = *head_pp;
     struct list_node_s* pred_p = NULL;
     struct list_node_s* temp_p;
@@ -49,7 +54,8 @@ int Insert(int value, struct list_node_s** head_pp) {
     }
 }
 
-int Delete(int value, struct list_node_s** head_pp) {
+int Delete(int value) {
+    struct list_node_s** head_pp = &head.next;
     struct list_node_s* curr_p = *head_pp;
     struct list_node_s* pred_p = NULL;
 
@@ -74,11 +80,15 @@ int Delete(int value, struct list_node_s** head_pp) {
 
 int PrintLinkedList(struct list_node_s* head_p) {
     struct list_node_s* curr_p = head_p;
+    int length = 0;
     while (curr_p->next != NULL) {
         cout << curr_p->next->data << "\n";
+        length++;
         curr_p = curr_p->next;
     }
+    cout <<"Length of the Linked List: "<< length << "\n";
 }
+
 
 int main(int argc, char* argv[]) {
 //    struct list_node_s first;
@@ -90,16 +100,27 @@ int main(int argc, char* argv[]) {
 //    cout << Member(2,&first) << "\n";
 //    cout << Insert(2,&first.next) << "\n";
 //    cout << Delete(1,&first.next) << "\n";
-    struct list_node_s head;
-    head.next=NULL;
-    for (int i = 0; i < 10; i++) {
-        Insert(rand(),&head.next);
-//        cout << Insert(i,&head.next) << "\n";
-    }
+//    struct list_node_s head;
+
+// add n random numbers
+//    head.next=NULL;
+//    int n = 10;
+//    int n_count = 0;
+//    while (n_count<n) {
+//        n_count+= Insert(rand());
+//    }
+
+    Insert(123);
+    PrintLinkedList(&head);
+//    cout << Member(123) << "\n";
+    cout << Delete(123) << "\n";
+    PrintLinkedList(&head);
+
+
 
 //    for(int i = 0; i<50; i++)
 //        printf(" %d ", rand());
-    PrintLinkedList(&head);
+//    PrintLinkedList(&head);
 //
 //    Delete(1,&head.next);
 //    Delete(2,&head.next);
@@ -107,7 +128,8 @@ int main(int argc, char* argv[]) {
 //    Insert(100,&head.next);
 //    Insert(2,&head.next);
 //    PrintLinkedList(&head);
+//test();
     return 0;
 }
 
-// cd "/home/thisal/Desktop/ConcurrentProgrammingLab1/" && g++ lab2.cpp -lpthread -o lab2 && "/home/thisal/Desktop/ConcurrentProgrammingLab1/"lab2
+// cd "/home/thisal/Desktop/ConcurrentProgrammingLab1/" && g++ a.cpp -lpthread -o a && "/home/thisal/Desktop/ConcurrentProgrammingLab1/"a
